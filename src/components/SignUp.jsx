@@ -11,7 +11,7 @@ const SignUp = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("male");
   const [about, setAbout] = useState("");
-  const [skills, setSkills] = useState("");
+  const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -130,7 +130,21 @@ const SignUp = () => {
           />
         </div>
 
-
+        <div className="mb-4">
+          <label className="block text-gray-600 text-sm mb-2">
+            Skills (comma separated)
+          </label>
+          <input
+            type="text"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400"
+            value={skills.join(",")}
+            onChange={(e) =>
+              setSkills(e.target.value.split(",").map((s) => s.trim()))
+            }
+            placeholder="Enter skills e.g. React, Node.js"
+            required
+          />
+        </div>
 
         {/* Messages */}
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
