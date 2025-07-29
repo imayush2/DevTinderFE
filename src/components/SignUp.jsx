@@ -14,13 +14,14 @@ const SignUp = () => {
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(""); 
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
       await axios.post(
         BASE_URL + "/signup",
-        { firstName, lastName, emailId, password, age, gender, about, skills },
+        { firstName, lastName, emailId, password, age, gender, about, skills , photoUrl },
         { withCredentials: true }
       );
       setSuccess("✅ Account created successfully! Redirecting to login...");
@@ -143,6 +144,17 @@ const SignUp = () => {
             }
             placeholder="Enter skills e.g. React, Node.js"
             required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-600 text-sm mb-2">Profile Photo URL</label>
+          <input
+            type="url"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400"
+            value={photoUrl}
+            onChange={(e) => setPhotoUrl(e.target.value)}
+            placeholder="Enter link to your profile photo"
           />
         </div>
 
